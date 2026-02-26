@@ -1,0 +1,37 @@
+pipeline{
+    agent any
+
+    tools {
+        maven '3.9.6'
+    }
+
+    stages {
+
+        stage('Build Jar') {
+            steps{
+                dir(docker-integration) {
+                    bat 'mvn clean install'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir(docker-integration) {
+                    bat 'docker build -t saikumar1605/docker-integration .'
+                }
+            }
+        }
+
+        stage('Push Image to DockerHub') {
+            steps {
+                dir(docker-integration) {
+                    withCredentials([string(credentialsId: 'dockerhubpwd',variable: 'dockerhubpwd')]) {
+                        bat 'docker login -u saikumar1605 -p %dockerhubpwd%'
+                        bat 'docker push saikumar1605/docker-integration'
+                    }
+                }
+            }
+        }
+    }
+}
