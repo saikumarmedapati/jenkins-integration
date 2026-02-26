@@ -9,7 +9,7 @@ pipeline{
 
         stage('Build Jar') {
             steps{
-                dir(docker-integration) {
+                dir('docker-integration') {
                     bat 'mvn clean install'
                 }
             }
@@ -17,7 +17,7 @@ pipeline{
 
         stage('Build Docker Image') {
             steps {
-                dir(docker-integration) {
+                dir('docker-integration') {
                     bat 'docker build -t saikumar1605/docker-integration .'
                 }
             }
@@ -25,11 +25,20 @@ pipeline{
 
         stage('Push Image to DockerHub') {
             steps {
-                dir(docker-integration) {
+                dir('docker-integration') {
                     withCredentials([string(credentialsId: 'dockerhubpwd',variable: 'dockerhubpwd')]) {
                         bat 'docker login -u saikumar1605 -p %dockerhubpwd%'
                         bat 'docker push saikumar1605/docker-integration'
                     }
+                }
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                dir('docker-integration') {
+                    bat 'docker run -d -p 8082:9090 --name sconex/docker-integration saikumar1605/docker-integration'
+                    bat 'ping -n 11 127.0.0.1 >nul'
                 }
             }
         }
