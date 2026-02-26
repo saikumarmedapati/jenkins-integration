@@ -37,7 +37,7 @@ pipeline{
         stage('Run Container') {
             steps {
                 dir('docker-integration') {
-                    bat 'docker run -d -p 8082:9090 --name sconex/docker-integration saikumar1605/docker-integration'
+                    bat 'docker run -d -p 8082:9090 --name docker-jenkins-integration saikumar1605/docker-integration'
                     bat 'ping -n 11 127.0.0.1 >nul'
                 }
             }
