@@ -11,6 +11,6 @@ public class TestController {
 
     @GetMapping
     public ResponseEntity<String> sampleResponse() {
-        return ResponseEntity.ok("Hai SconexSoft TEAM. Good Morning..");
+        return ResponseEntity.ok("Hai SconexSoft TEAM. Good AfterNoon- Implemented Git hook");
     }
 }
