@@ -11,6 +11,6 @@ public class TestController {
 
     @GetMapping
     public ResponseEntity<String> sampleResponse() {
-        return ResponseEntity.ok("Hai SconexSoft members. Good AfterNoon- Implemented Git hook");
+        return ResponseEntity.ok("HI SCONEXSOFT I SUCCESSFULLY IMPLEMENTED THE GITHUB WEBHOOK");
     }
 }
