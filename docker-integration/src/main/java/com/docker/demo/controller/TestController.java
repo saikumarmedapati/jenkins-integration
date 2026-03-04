@@ -11,6 +11,6 @@ public class TestController {
 
     @GetMapping
     public ResponseEntity<String> sampleResponse() {
-        return ResponseEntity.ok("Hai SconexSoft TEAM. Good Evening");
+        return ResponseEntity.ok("Hai SconexSoft TEAM. Good Morning..");
     }
 }
